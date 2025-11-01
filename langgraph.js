@@ -72,7 +72,9 @@ async function llmCall(state) {
 
   async function toolNode(state) {
     const lastMessage = state.messages.at(-1);
-  
+    console.log("Tool node invoked with last message:", state.messages);
+    console.log("Tool node invoked with last message:", lastMessage);
+    
     if (lastMessage == null || !isAIMessage(lastMessage)) {
       return { messages: [] };
     }
@@ -110,7 +112,7 @@ const agent = new StateGraph(MessagesState)
 
 // Invoke
 const result = await agent.invoke({
-  messages: [new HumanMessage("Add 3 and 4.")],
+  messages: [new HumanMessage("Add 3 and 4, after that multiply with 4.")],
 });
 
 for (const message of result.messages) {
